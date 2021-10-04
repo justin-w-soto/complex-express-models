@@ -10,8 +10,18 @@ describe('crudish routes', () => {
   });
 
   it('should save an animal', () => {
-    const animalObject = {x};
-    return request(app) .post('/') .send(animalObject) .then((res) => {expect(res.body).toEqual({x})})
+    const animalObject = {
+    animal_id: 4,
+    animal: 'raven'
+   
+  };
+    return request(app) .post('/api/animalkingdom/')
+     .send(animalObject) 
+     .then((res) => {
+       expect(res.body).toEqual({
+    animal_id: 4, 
+    animal: 'raven'
+  })})
   })
 
   afterAll(() => {
