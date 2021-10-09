@@ -64,6 +64,7 @@ const app = require ('../lib/app.js');
 
 it('should GET all species', async () => {
   await addSpecies();
+
   return request(app)
     .get('/api/species')
     .then((res) => {
@@ -78,6 +79,10 @@ it('should GET all species', async () => {
         },
         {
           id: '3',
+          type: expect.any(String),
+        },
+        {
+          id: '4',
           type: expect.any(String),
         },
       ]);
