@@ -61,6 +61,30 @@ const app = require ('../lib/app.js');
     });
 
 // ->>>--------------------------------------------------------------------------->>
+
+it('should GET all species', async () => {
+  await addSpecies();
+  return request(app)
+    .get('/api/species')
+    .then((res) => {
+      expect(res.body).toEqual([
+        {
+          id: '1',
+          type: expect.any(String),
+        },
+        {
+          id: '2',
+          type: expect.any(String),
+        },
+        {
+          id: '3',
+          type: expect.any(String),
+        },
+      ]);
+    });
+});
+// ->>>--------------------------------------------------------------------------->>
+
   afterAll(() => {
     pool.end();
   });
