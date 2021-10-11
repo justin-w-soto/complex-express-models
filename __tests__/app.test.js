@@ -107,13 +107,26 @@ it('should POST an animal', async () => {
         
       });
 
-console.log(res.body);
 
     });
 });
 
-
 // ->>>--------------------------------------------------------------------------->>
+
+it('should get an animal by id', async () => {
+  await addSpecies();
+  await addAnimals();
+
+  return request(app)
+    .get('/api/animals/1')
+    .then((res) => {
+      expect(res.body).toEqual({
+        id: '1',
+        name: expect.any(String),
+        speciesId: expect.any(String),
+      });
+    });
+});
 
 // ->>>--------------------------------------------------------------------------->>
 
