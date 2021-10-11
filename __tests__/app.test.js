@@ -203,6 +203,35 @@ it('DELETES an animal', async () => {
 
 // ->>>--------------------------------------------------------------------------->>
 
+it('should GET a count of animals by species', async () => {
+  await addSpecies();
+  await addAnimals();
+  return request(app)
+    .get('/api/animals/species/count')
+    .then((res) => {
+      expect(res.body).toEqual([
+
+        {
+          count: expect.any(String),
+          type: expect.any(String)
+        },
+        {
+          count: expect.any(String),
+          type: expect.any(String)
+        },
+        {
+          count: expect.any(String),
+          type: expect.any(String)
+        },
+        {
+          count: expect.any(String),
+          type: expect.any(String)
+        }
+
+      ]);
+    });
+});
+
   afterAll(() => {
     pool.end();
   });
