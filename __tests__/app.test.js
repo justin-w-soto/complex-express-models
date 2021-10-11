@@ -64,7 +64,6 @@ const app = require ('../lib/app.js');
 
 it('should GET all species', async () => {
   await addSpecies();
-
   return request(app)
     .get('/api/species')
     .then((res) => {
@@ -93,7 +92,6 @@ it('should GET all species', async () => {
 
 it('should POST an animal', async () => {
   await addSpecies();
-
   return request(app)
     .post('/api/animals/')
     .send({ name: 'wolf', speciesId: '1' })
@@ -116,7 +114,6 @@ it('should POST an animal', async () => {
 it('should GET an animal by id', async () => {
   await addSpecies();
   await addAnimals();
-
   return request(app)
     .get('/api/animals/1')
     .then((res) => {
@@ -135,7 +132,6 @@ it('should GET an animal by id', async () => {
 xit('should GET all animals and their species', async () => {
   await addSpecies();
   await addAnimals();
-
   return request(app)
     .get('/api/animals/species')
     .then((res) => {
@@ -163,21 +159,24 @@ xit('should GET all animals and their species', async () => {
 
 // ->>>--------------------------------------------------------------------------->>
 
-it('updates an animal with a PUT route', async () => {
+it('update an animal with a PUT route', async () => {
   await addSpecies();
   await addAnimals();
-
   return request(app)
     .put('/api/animals/1')
     .send({
+
       name: 'flying pig',
-      speciesId: '1',
+      speciesId: '1'
+
     })
     .then((res) => {
       expect(res.body).toEqual({
+
         id: '1',
         name: 'flying pig',
-        speciesId: '1',
+        speciesId: '1'
+
       });
     });
 });
