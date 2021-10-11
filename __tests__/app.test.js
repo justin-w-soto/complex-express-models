@@ -64,7 +64,6 @@ const app = require ('../lib/app.js');
 
 it('should GET all species', async () => {
   await addSpecies();
-
   return request(app)
     .get('/api/species')
     .then((res) => {
@@ -93,7 +92,6 @@ it('should GET all species', async () => {
 
 it('should POST an animal', async () => {
   await addSpecies();
-
   return request(app)
     .post('/api/animals/')
     .send({ name: 'wolf', speciesId: '1' })
@@ -107,21 +105,132 @@ it('should POST an animal', async () => {
         
       });
 
-console.log(res.body);
 
+    });
+});
+
+// ->>>--------------------------------------------------------------------------->>
+
+it('should GET an animal by id', async () => {
+  await addSpecies();
+  await addAnimals();
+  return request(app)
+    .get('/api/animals/1')
+    .then((res) => {
+      expect(res.body).toEqual({
+
+        id: '1',
+        name: expect.any(String),
+        speciesId: expect.any(String)
+
+      });
+    });
+});
+
+// ->>>--------------------------------------------------------------------------->>
+
+xit('should GET all animals and their species', async () => {
+  await addSpecies();
+  await addAnimals();
+  return request(app)
+    .get('/api/animals/species')
+    .then((res) => {
+      expect(res.body).toEqual([
+
+        {
+          name: expect.any(String),
+          species: expect.any(String)
+        },
+        {
+          name: expect.any(String),
+          species: expect.any(String)
+        },
+        {
+          name: expect.any(String),
+          species: expect.any(String)
+        },
+        {
+          name: expect.any(String),
+          species: expect.any(String)
+        }
+
+      ]);
     });
 });
 
 
 // ->>>--------------------------------------------------------------------------->>
 
-// ->>>--------------------------------------------------------------------------->>
+it('updates an animal with a PUT route', async () => {
+  await addSpecies();
+  await addAnimals();
+  return request(app)
+    .put('/api/animals/1')
+    .send({
+
+      name: 'flying pig',
+      speciesId: '1'
+
+    })
+    .then((res) => {
+      expect(res.body).toEqual({
+
+        id: '1',
+        name: 'flying pig',
+        speciesId: '1'
+
+      });
+    });
+});
 
 // ->>>--------------------------------------------------------------------------->>
 
-// ->>>--------------------------------------------------------------------------->>
+it('DELETES an animal', async () => {
+  await addSpecies();
+  await addAnimals();
+  return request(app)
+    .delete('/api/animals/1')
+    .then((res) => {
+      expect(res.body).toEqual({
+
+        id: '1',
+        name: expect.any(String),
+        speciesId: expect.any(String)
+
+      });
+    });
+});
 
 // ->>>--------------------------------------------------------------------------->>
+
+it('should GET a count of animals by species', async () => {
+  await addSpecies();
+  await addAnimals();
+  return request(app)
+    .get('/api/animals/species/count')
+    .then((res) => {
+      expect(res.body).toEqual([
+
+        {
+          count: expect.any(String),
+          type: expect.any(String)
+        },
+        {
+          count: expect.any(String),
+          type: expect.any(String)
+        },
+        {
+          count: expect.any(String),
+          type: expect.any(String)
+        },
+        {
+          count: expect.any(String),
+          type: expect.any(String)
+        }
+
+      ]);
+    });
+});
 
   afterAll(() => {
     pool.end();
