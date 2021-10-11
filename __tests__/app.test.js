@@ -113,7 +113,7 @@ it('should POST an animal', async () => {
 
 // ->>>--------------------------------------------------------------------------->>
 
-it('should get an animal by id', async () => {
+it('should GET an animal by id', async () => {
   await addSpecies();
   await addAnimals();
 
@@ -129,6 +129,31 @@ it('should get an animal by id', async () => {
 });
 
 // ->>>--------------------------------------------------------------------------->>
+
+it('should GET all animals and their species', async () => {
+  await addSpecies();
+  await addAnimals();
+
+  return request(app)
+    .get('/api/animals/species')
+    .then((res) => {
+      expect(res.body).toEqual([
+        {
+          name: expect.any(String),
+          species: expect.any(String),
+        },
+        {
+          name: expect.any(String),
+          species: expect.any(String),
+        },
+        {
+          name: expect.any(String),
+          species: expect.any(String),
+        },
+      ]);
+    });
+});
+
 
 // ->>>--------------------------------------------------------------------------->>
 
