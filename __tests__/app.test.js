@@ -136,22 +136,24 @@ xit('should GET all animals and their species', async () => {
     .get('/api/animals/species')
     .then((res) => {
       expect(res.body).toEqual([
+
         {
           name: expect.any(String),
-          species: expect.any(String),
+          species: expect.any(String)
         },
         {
           name: expect.any(String),
-          species: expect.any(String),
+          species: expect.any(String)
         },
         {
           name: expect.any(String),
-          species: expect.any(String),
+          species: expect.any(String)
         },
         {
           name: expect.any(String),
-          species: expect.any(String),
+          species: expect.any(String)
         }
+
       ]);
     });
 });
@@ -159,7 +161,7 @@ xit('should GET all animals and their species', async () => {
 
 // ->>>--------------------------------------------------------------------------->>
 
-it('update an animal with a PUT route', async () => {
+it('updates an animal with a PUT route', async () => {
   await addSpecies();
   await addAnimals();
   return request(app)
@@ -181,8 +183,23 @@ it('update an animal with a PUT route', async () => {
     });
 });
 
-
 // ->>>--------------------------------------------------------------------------->>
+
+it('DELETES an animal', async () => {
+  await addSpecies();
+  await addAnimals();
+  return request(app)
+    .delete('/api/animals/1')
+    .then((res) => {
+      expect(res.body).toEqual({
+
+        id: '1',
+        name: expect.any(String),
+        speciesId: expect.any(String)
+
+      });
+    });
+});
 
 // ->>>--------------------------------------------------------------------------->>
 
