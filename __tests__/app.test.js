@@ -92,17 +92,23 @@ it('should GET all species', async () => {
 // ->>>--------------------------------------------------------------------------->>
 
 it('should POST an animal', async () => {
-  await addAnimals();
+  await addSpecies();
 
   return request(app)
-    .post('/api/animals')
+    .post('/api/animals/')
     .send({ name: 'wolf', speciesId: '1' })
     .then((res) => {
+
       expect(res.body).toEqual({
+
         id: expect.any(String),
         name: 'wolf',
         speciesId: '1',
+        
       });
+
+console.log(res.body);
+
     });
 });
 
